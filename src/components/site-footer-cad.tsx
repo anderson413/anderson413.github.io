@@ -1,47 +1,29 @@
 import Link from "next/link"
 
-import { LICENSE, SOURCE_CODE_GITHUB_URL } from "@/config/site"
+import {
+  LICENSE,
+  SITE_INFO,
+  SOURCE_CODE_GITHUB_URL,
+  UTM_PARAMS,
+} from "@/config/site"
 import type { BuildInfo } from "@/lib/build-info"
 import { getBuildInfo, getStack } from "@/lib/build-info"
 import { cn } from "@/lib/utils"
-import { Separator } from "@/components/ui/separator"
-import { DmcaIcon, GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons"
-import { SiteFooterInteractiveLogotype } from "@/components/site-footer-brand"
-import { SOCIAL } from "@/features/portfolio/data/social-links"
+import { DmcaIcon } from "@/components/icons"
 
 // Imported here rather than through `@/config/site`, which client components
 // pull in, to keep the manifest out of client bundles.
 import packageJson from "../../package.json"
-// Precomputed by `pnpm registry:build`, so the count costs no registry import.
-import registryStats from "../../registry-stats.json"
-import { ChanhDaiMark } from "./chanhdai-mark"
 
-const INSPIRED_BY = [
-  "Tailwind CSS",
-  "shadcn/ui",
-  "Vercel",
-  "Evil Charts",
-  "Devouring Details",
-  "Skiper UI",
-  "Making Software",
-  "shadcncraft",
-]
+// TODO: 模板作者的 "Inspired by" 致谢清单已随品牌清理移除；
+// 想展示自己的致谢/工具清单可从 git 历史找回并改。
 
-const OPENPANEL_URL =
-  "https://openpanel.dev?utm_source=chanhdai.com&utm_medium=referral&utm_campaign=footer"
-
-// Not derived from `SITE_INFO.url`: that follows `NEXT_PUBLIC_APP_URL` and
-// would read `ncdai.localhost` in dev.
-const SITE_TITLE = "chanhdai.com"
+const OPENPANEL_URL = `https://openpanel.dev?utm_source=${UTM_PARAMS.utm_source}&utm_medium=referral&utm_campaign=footer`
 
 const SITE_SUBTITLE = packageJson.description
 
 /** Footer laid out as the title block of a technical drawing. */
 export function SiteFooterCad() {
-  const xLink = SOCIAL.x
-  const githubLink = SOCIAL.github
-  const linkedinLink = SOCIAL.linkedin
-
   const build = getBuildInfo()
   const stack = getStack()
 
@@ -54,24 +36,13 @@ export function SiteFooterCad() {
 
         <div className="relative">
           <div className="screen-line-bottom flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-3 font-mono text-sm">
-            <span className="font-medium">{SITE_TITLE}</span>
+            <span className="font-medium">{SITE_INFO.name}</span>
             <span className="font-sans text-muted-foreground">
               {SITE_SUBTITLE}
             </span>
           </div>
 
           <dl className="grid grid-cols-2 gap-px bg-line font-mono md:grid-cols-4">
-            <Field label="Crafted by">
-              <a
-                className="link-underline"
-                href={xLink.href}
-                target="_blank"
-                rel="noopener"
-              >
-                {xLink.handle}
-              </a>
-            </Field>
-
             <Field label="Build">
               <BuildValue build={build} />
             </Field>
@@ -79,8 +50,6 @@ export function SiteFooterCad() {
             <Field label="Date">
               <time dateTime={build.date}>{build.date}</time>
             </Field>
-
-            <Field label="Registry">{registryStats.total} items</Field>
 
             <Field label="Deployed on">
               <span className="font-sans" aria-hidden>
@@ -149,39 +118,7 @@ export function SiteFooterCad() {
                     llms.txt
                   </a>
                 </li>
-                <li>
-                  <a
-                    className="link-underline"
-                    href="/index.md"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    index.md
-                  </a>
-                </li>
               </ul>
-            </Field>
-
-            <Field className="col-span-2 md:col-span-4" label="Inspired by">
-              {/*
-                Cancelling the cell padding and repeating the parent's column
-                count and gap lands these columns on the same grid lines as the
-                cells above, rather than dividing the padded width.
-              */}
-              <ol className="-mx-4 grid grid-cols-2 gap-x-px gap-y-0.5 font-sans md:grid-cols-4">
-                {INSPIRED_BY.map((name, index) => (
-                  <li className="flex gap-2 px-4" key={name}>
-                    {/* Hidden: the list element already conveys the position. */}
-                    <span
-                      className="font-mono text-muted-foreground/80"
-                      aria-hidden
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {name}
-                  </li>
-                ))}
-              </ol>
             </Field>
           </dl>
         </div>
@@ -191,56 +128,12 @@ export function SiteFooterCad() {
         <div className="screen-line-top screen-line-bottom flex items-center gap-3 screen-line-bottom-border px-4 py-3 text-muted-foreground">
           <Link
             href="/"
-            className="mr-auto text-muted-foreground transition-[color] hover:text-foreground"
+            className="mr-auto flex items-center text-muted-foreground transition-[color] hover:text-foreground"
             aria-label="Home"
           >
-            <ChanhDaiMark className="h-4" />
+            {/* TODO: replace with your own logo. */}
+            <span aria-hidden className="block size-4 border border-line" />
           </Link>
-
-          <a
-            className="flex items-center transition-[color] hover:text-foreground"
-            href={xLink.href}
-            target="_blank"
-            rel="noopener"
-            aria-label="X Profile"
-          >
-            <XIcon className="size-4" />
-          </a>
-
-          <Separator
-            orientation="vertical"
-            className="data-vertical:h-4 data-vertical:self-center"
-          />
-
-          <a
-            className="flex items-center transition-[color] hover:text-foreground"
-            href={githubLink.href}
-            target="_blank"
-            rel="noopener"
-            aria-label="GitHub Profile"
-          >
-            <GitHubIcon className="size-4" />
-          </a>
-
-          <Separator
-            orientation="vertical"
-            className="data-vertical:h-4 data-vertical:self-center"
-          />
-
-          <a
-            className="flex items-center transition-[color] hover:text-foreground"
-            href={linkedinLink.href}
-            target="_blank"
-            rel="noopener"
-            aria-label="LinkedIn Profile"
-          >
-            <LinkedInIcon className="size-4" />
-          </a>
-
-          <Separator
-            orientation="vertical"
-            className="data-vertical:h-4 data-vertical:self-center"
-          />
 
           <a
             className="flex items-center transition-[color] hover:text-foreground"
@@ -256,8 +149,6 @@ export function SiteFooterCad() {
           </a>
         </div>
       </div>
-
-      <SiteFooterInteractiveLogotype />
 
       <div className="h-(--fade-bottom-height)" />
       <div className="pb-[env(safe-area-inset-bottom,0)]" />

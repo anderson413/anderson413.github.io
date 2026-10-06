@@ -82,12 +82,13 @@ export const Index: Record<string, any> = {`
   const registryJSON = JSON.stringify(
     {
       $schema: "https://ui.shadcn.com/schema/registry.json",
-      name: "ncdai",
-      homepage: "https://chanhdai.com/components",
+      name: "resume-site",
+      homepage: "https://anderson413.github.io",
       items: publishedItems.map((item) => {
         return {
           ...item,
-          author: item.author ?? "ncdai <dai@chanhdai.com>",
+          // TODO: replace with your own author identity.
+          author: item.author ?? "Your Name <you@example.com>",
           files:
             item.files?.map((file) => {
               if (file.path.startsWith("src/")) {

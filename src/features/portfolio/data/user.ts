@@ -1,65 +1,40 @@
 import type { User } from "@/features/portfolio/types/user"
 
+// TODO: 带空值/TODO 的字段等你的资料补齐；email/电话为 base64 编码。
 export const USER: User = {
-  firstName: "Chánh Đại",
-  lastName: "Nguyễn",
-  displayName: "Chánh Đại",
-  username: "ncdai",
-  gender: "male",
-  pronouns: "he/him",
-  bio: "Creating with code. Small details matter.",
+  firstName: "Anderson",
+  lastName: "",
+  displayName: "Anderson",
+  username: "anderson413",
+  gender: "male", // TODO: 未渲染，如需使用请改为你的信息
+  pronouns: "he/him", // TODO: 未渲染，如需使用请改为你的信息
+  bio: "First-year Data Science student, currently learning C programming.",
   flipSentences: [
-    "Creating with code. Small details matter.",
-    "Design Engineer.",
-    "Open source contributor.",
-    "I own a vintage iPhone.",
+    "First-year Data Science undergraduate.",
+    "Currently learning C programming.",
+    "Starting from the basics.",
   ],
-  address: "Ho Chi Minh City, Viet Nam",
-  phoneNumberB64: "Kzg0Nzc3ODg4MTQ4", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
-  emailB64: "ZGFpQGNoYW5oZGFpLmNvbQ==", // base64 encoded
-  website: "https://chanhdai.com",
-  jobTitle: "Design Engineer",
-  jobs: [
-    {
-      title: "Design Engineer",
-      company: "shadcncraft",
-      website: "https://shadcncraft.com?atp=ncdai",
-      experienceId: "shadcncraft",
-    },
-    {
-      title: "Founder",
-      company: "Quaric",
-      website: "https://quaric.com",
-      experienceId: "quaric",
-    },
-  ],
-  about: `- I’m Chánh Đại (call me Dai) — a Design Engineer with 5+ years of experience, known for pixel-perfect execution and an obsessive attention to detail.
-- Passionate about exploring new technologies and turning ideas into reality through polished, thoughtfully crafted projects.
-- Creator of [chanhdai.com](https://github.com/ncdai/chanhdai.com) (2.2k stars), [React Wheel Picker](https://react-wheel-picker.chanhdai.com) (50k+ weekly downloads, ▲ Vercel OSS Program), and [ZaDark](https://zadark.com) (80k+ downloads, 30k+ users) — peak metrics.
+  address: "Xi'an, China", // TODO: 确认所在地
+  phoneNumberB64: "", // TODO: E.164 格式 base64 编码后填入
+  emailB64: "NDkwMjA2OTE5QHFxLmNvbQ==", // 490206919@qq.com（base64 编码；换邮箱时重新编码）
+  website: "https://github.com/anderson413", // TODO: 换成你的个人主页/域名
+  jobTitle: "Data Science Undergraduate",
+  jobs: [], // TODO: 有实习/工作经历再补
+  about: `- I'm Anderson — a first-year undergraduate at Xi'an University of Finance and Economics (西安财经大学), majoring in Data Science.
+- Currently learning C programming, starting from the very basics.
+- Outside of class, I like making specimens and watching BL.
 `,
-  avatar: "https://assets.chanhdai.com/images/chanhdai-avatar-ghibli.webp",
-  avatarSketch: "https://assets.chanhdai.com/images/avatar-sketch.webp",
+  avatar: "/avatar.webp",
+  avatarSketch: "/avatar.webp",
   avatarVariants: {
-    lightOff: "https://assets.chanhdai.com/images/avatar-light-off.webp",
-    lightOn: "https://assets.chanhdai.com/images/avatar-light-on.webp",
-    darkOff: "https://assets.chanhdai.com/images/avatar-dark-off.webp",
-    darkOn: "https://assets.chanhdai.com/images/avatar-dark-on.webp",
+    lightOff: "/avatar.webp",
+    lightOn: "/avatar.webp",
+    darkOff: "/avatar.webp",
+    darkOn: "/avatar.webp",
   },
-  ogImage:
-    "https://assets.chanhdai.com/images/screenshot-og-image-dark.png?t=1778602757",
-  namePronunciationUrl: "https://assets.chanhdai.com/audio/chanhdai.mp3",
-  timeZone: "Asia/Ho_Chi_Minh",
-  keywords: [
-    "ncdai",
-    "nguyenchanhdai",
-    "nguyen chanh dai",
-    "chanhdai",
-    "chanh dai",
-    "iamncdai",
-    "quaric",
-    "zadark",
-    "nguyễn chánh đại",
-    "chánh đại",
-  ],
-  dateCreated: "2023-10-20", // YYYY-MM-DD
+  ogImage: "", // TODO: 换成你的分享图（og:image）
+  namePronunciationUrl: "", // 留空则不显示"名字发音"按钮
+  timeZone: "Asia/Shanghai",
+  keywords: ["anderson"],
+  dateCreated: "2026-10-06", // YYYY-MM-DD
 }

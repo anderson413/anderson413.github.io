@@ -7,11 +7,10 @@ import { NuqsAdapter } from "nuqs/adapters/next/app"
 import type { WebSite, WithContext } from "schema-dts"
 
 import { JSON_LD_ID, personJsonLd } from "@/config/json-ld"
-import { META_THEME_COLORS, SITE_INFO, X_HANDLE } from "@/config/site"
+import { META_THEME_COLORS, SITE_INFO } from "@/config/site"
 import { fontVariables } from "@/lib/fonts"
 import { JsonLdScript } from "@/lib/json-ld"
 import { Providers } from "@/components/providers"
-import { USER } from "@/features/portfolio/data/user"
 
 function getWebSiteJsonLd(): WithContext<WebSite> {
   return {
@@ -43,66 +42,25 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_INFO.url),
   title: {
     template: `%s – ${SITE_INFO.name}`,
-    default: `${USER.displayName} – ${USER.jobTitle}`,
+    // TODO: surface your own name and job title once the portfolio data is
+    // replaced (see `src/features/portfolio/data/user.ts`).
+    default: SITE_INFO.name,
   },
   description: SITE_INFO.description,
   keywords: SITE_INFO.keywords,
-  authors: [
-    {
-      name: "ncdai",
-      url: SITE_INFO.url,
-    },
-  ],
-  creator: "ncdai",
+  // TODO: add your own profile attributes (name, username, gender) and a
+  // 1200x630 OG image once the portfolio data is replaced.
   openGraph: {
     siteName: SITE_INFO.name,
     url: "/",
     type: "profile",
     locale: "en_US",
-    firstName: USER.firstName,
-    lastName: USER.lastName,
-    username: USER.username,
-    gender: USER.gender,
-    images: [
-      {
-        url: SITE_INFO.ogImage,
-        width: 1200,
-        height: 630,
-        alt: SITE_INFO.name,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    site: X_HANDLE,
-    creator: X_HANDLE,
-    images: [SITE_INFO.ogImage],
   },
-  icons: {
-    icon: [
-      {
-        url: "https://assets.chanhdai.com/images/favicon.ico",
-        sizes: "32x32",
-      },
-      {
-        url: "https://assets.chanhdai.com/images/favicon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "https://assets.chanhdai.com/images/favicon-dark.svg",
-        sizes: "any",
-        type: "image/svg+xml",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
-    apple: {
-      url: "https://assets.chanhdai.com/images/apple-touch-icon.png",
-      type: "image/png",
-      sizes: "180x180",
-    },
-  },
+  // Icons are picked up from the app directory (`src/app/icon.svg`); replace it
+  // with your own favicon/apple-touch-icon.
 }
 
 export const viewport: Viewport = {
@@ -136,17 +94,6 @@ export default function RootLayout({
               try {
                 var value = localStorage.getItem('avatarLights');
                 document.documentElement.dataset.avatarLights = JSON.parse(value || '"on"');
-              } catch(_) {}
-            `,
-          }}
-        />
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var value = localStorage.getItem('sidebarOpen');
-                document.documentElement.dataset.sidebarOpen = JSON.parse(value || 'true');
               } catch(_) {}
             `,
           }}

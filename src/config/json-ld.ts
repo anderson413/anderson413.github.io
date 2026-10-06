@@ -14,14 +14,11 @@ export const JSON_LD_ID = {
   person: `${SITE_INFO.url}/#person`,
 } as const
 
+// TODO: 换成自己的域名/头像后可继续补充 image 等字段。
 export const personJsonLd: Person = {
   "@type": "Person",
   "@id": JSON_LD_ID.person,
   name: USER.displayName,
-  alternateName: [USER.username],
-  identifier: USER.username,
-  image: USER.avatar,
   url: SITE_INFO.url,
-  // Public profiles opt in via their `sameAs` flag (Knowledge Graph).
   sameAs: SOCIAL_LINKS.filter((link) => link.sameAs).map((link) => link.href),
 }

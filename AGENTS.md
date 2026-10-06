@@ -1,22 +1,22 @@
-# AI agent guidelines for chanhdai.com
+# AI agent guidelines
 
-Next.js 16 (App Router) portfolio, blog, and shadcn registry website.
+Next.js 16 (App Router) personal resume website.
 
 **Stack**: TypeScript, React 19, Tailwind CSS v4, shadcn/ui, MDX, Vitest, pnpm (Bun for scripts), Vercel
 
 ## Project structure
 
-| Directory                              | Purpose                                                            |
-| -------------------------------------- | ------------------------------------------------------------------ |
-| `src/app/`                             | App Router pages, layouts, API routes                              |
-| `src/components/`                      | Shared UI components                                               |
-| `src/registry/`                        | Registry source (components, hooks, blocks, examples, lib)         |
-| `src/features/`                        | Feature modules: `doc`, `blog`, `portfolio`, `sponsor`, `bookmark` |
-| `src/config/`                          | Site (`site.ts`), registry (`registry.ts`), JSON-LD config         |
-| `src/scripts/`                         | Build scripts (registry, capture) run with Bun                     |
-| `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                                        |
+| Directory                              | Purpose                                                    |
+| -------------------------------------- | ---------------------------------------------------------- |
+| `src/app/`                             | App Router pages, layouts, API routes                      |
+| `src/components/`                      | Shared UI components                                       |
+| `src/registry/`                        | Registry source (components, hooks, blocks, examples, lib) |
+| `src/features/`                        | Feature modules: `portfolio`                               |
+| `src/config/`                          | Site (`site.ts`), registry (`registry.ts`), JSON-LD config |
+| `src/scripts/`                         | Build scripts (registry, capture) run with Bun             |
+| `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                                |
 
-**Key files**: `components.json` (shadcn config), `src/features/portfolio/data/` (portfolio data), `src/features/{sponsor,bookmark}/data.tsx` (sponsor and bookmark data), `.env.example` (env vars)
+**Key files**: `components.json` (shadcn config), `src/features/portfolio/data/` (portfolio data), `.env.example` (env vars)
 
 ## Component registry
 
@@ -31,7 +31,7 @@ Built on shadcn/ui. Registry types and their definition files:
 | `registry:lib`       | `src/registry/lib/_registry.ts`        |
 | `registry:style`     | `src/registry/styles/_registry.ts`     |
 
-**NEVER EDIT** auto-generated outputs of `pnpm registry:build`: `registry.json`, `registry-stats.json`, `src/registry/__index__.tsx`, `public/r/*.json`
+**NEVER EDIT** auto-generated outputs of `pnpm registry:build`: `registry.json`, `registry-stats.json`, `src/registry/__index__.tsx`, `public/r/*.json`. The committed copies of `registry.json`, `registry-stats.json` and `public/r/*.json` were removed with the docs/blocks sections; a registry build (requires Bun) re-creates them.
 
 ### Adding a new component
 
@@ -39,14 +39,10 @@ Built on shadcn/ui. Registry types and their definition files:
 2. Register in the appropriate `_registry.ts` file
 3. Create example in `src/registry/examples/`
 4. Run `pnpm registry:build`
-5. Add docs MDX in `src/features/doc/content/components/` (category is derived from the folder)
 
 ## Content system
 
-All content lives in `src/features/doc/content/` as MDX files, split into `blog/` and `components/`. The category is derived from the immediate subfolder name (not declared in frontmatter), so a file's location determines whether it's a blog post or component doc.
-
-- **Data layer**: `src/features/doc/data/documents.ts` (`getAllDocs`, `getDocBySlug`, `getDocsByCategory`)
-- **Blog UI**: `src/features/blog/` (rendering only, imports data from `features/doc`)
+The MDX blog/component-docs system (`src/features/doc`, `src/features/blog`, `src/components/mdx.tsx`) has been removed along with its routes. The site renders only the resume home page; portfolio content lives in `src/features/portfolio/data/`.
 
 ## Coding guidelines
 

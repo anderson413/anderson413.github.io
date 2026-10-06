@@ -9,8 +9,9 @@ updates:
     target-branch: "staging"
     schedule:
       interval: "monthly"
-    assignees:
-      - "ncdai"
+    # TODO: add your own GitHub username as assignee.
+    # assignees:
+    #   - "your-username"
     groups:
       # Collapse all action bumps into a single PR to reduce noise.
       github-actions:
