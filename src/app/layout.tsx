@@ -48,16 +48,23 @@ export const metadata: Metadata = {
   },
   description: SITE_INFO.description,
   keywords: SITE_INFO.keywords,
-  // TODO: add your own profile attributes (name, username, gender) and a
-  // 1200x630 OG image once the portfolio data is replaced.
   openGraph: {
     siteName: SITE_INFO.name,
     url: "/",
     type: "profile",
     locale: "en_US",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mounted blue Morpho butterflies",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/og.jpg"],
   },
   // Icons are picked up from the app directory (`src/app/icon.svg`); replace it
   // with your own favicon/apple-touch-icon.
